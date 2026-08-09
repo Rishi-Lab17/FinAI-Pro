@@ -1,0 +1,44 @@
+# ==============================
+# FinAI Pro - Python Dependencies
+# ==============================
+
+# FastAPI Framework
+fastapi==0.116.1
+uvicorn==0.35.0
+
+# HTML Templates
+jinja2==3.1.6
+
+# Form Handling
+python-multipart==0.0.20
+
+# Database
+sqlalchemy==2.0.43
+
+# Password Hashing
+passlib[bcrypt]==1.7.4
+bcrypt==4.3.0
+
+# Data Validation
+pydantic==2.11.7
+
+# AI & Machine Learning
+scikit-learn==1.7.1
+numpy==2.3.2
+pandas==2.3.1
+
+# Charts & Data
+matplotlib==3.10.5
+
+# OCR
+pytesseract==0.3.13
+Pillow==11.3.0
+
+# PDF Generation
+reportlab==4.4.3
+
+# Excel Generation
+openpyxl==3.1.5
+
+# Environment Variables
+python-dotenv==1.1.1
