@@ -1,0 +1,634 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analytics | FinAI Pro
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- PAGE HEADER -->
+    <div class="mb-4">
+
+        <div class="d-flex align-items-center gap-3">
+
+            <div
+                style="
+                    width:52px;
+                    height:52px;
+                    border-radius:16px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    background:linear-gradient(135deg,#4169E1,#6D5CE7);
+                    color:white;
+                    box-shadow:0 10px 25px rgba(65,105,225,.20);
+                "
+            >
+                <i class="bi bi-bar-chart-line-fill fs-4"></i>
+            </div>
+
+            <div>
+
+                <h2 class="fw-bold mb-1">
+                    Financial Analytics
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Understand your income, spending and savings.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY CARDS -->
+    <div class="row g-4 mb-4">
+
+        <!-- INCOME -->
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <span class="text-muted">
+                            Total Income
+                        </span>
+
+                        <div
+                            style="
+                                width:42px;
+                                height:42px;
+                                border-radius:13px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                background:#E9F8F1;
+                            "
+                        >
+                            <i class="bi bi-arrow-down-left text-success"></i>
+                        </div>
+
+                    </div>
+
+                    <h3 class="fw-bold mb-0 text-success">
+                        ₹ {{ "%.2f"|format(summary.total_income) }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXPENSE -->
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <span class="text-muted">
+                            Total Expenses
+                        </span>
+
+                        <div
+                            style="
+                                width:42px;
+                                height:42px;
+                                border-radius:13px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                background:#FFF0F2;
+                            "
+                        >
+                            <i class="bi bi-arrow-up-right text-danger"></i>
+                        </div>
+
+                    </div>
+
+                    <h3 class="fw-bold mb-0 text-danger">
+                        ₹ {{ "%.2f"|format(summary.total_expenses) }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BALANCE -->
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <span class="text-muted">
+                            Balance
+                        </span>
+
+                        <div
+                            style="
+                                width:42px;
+                                height:42px;
+                                border-radius:13px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                background:#E8EEFF;
+                            "
+                        >
+                            <i class="bi bi-wallet2 text-primary"></i>
+                        </div>
+
+                    </div>
+
+                    <h3 class="fw-bold mb-0 text-primary">
+                        ₹ {{ "%.2f"|format(summary.balance) }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAVINGS -->
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <span class="text-muted">
+                            Savings Rate
+                        </span>
+
+                        <div
+                            style="
+                                width:42px;
+                                height:42px;
+                                border-radius:13px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                background:#F0EDFF;
+                            "
+                        >
+                            <i class="bi bi-piggy-bank-fill" style="color:#6D5CE7;"></i>
+                        </div>
+
+                    </div>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ summary.savings_rate }}%
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CURRENT MONTH -->
+    <div class="card mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center gap-2 mb-4">
+
+                <i class="bi bi-calendar3 text-primary fs-4"></i>
+
+                <div>
+
+                    <h4 class="fw-bold mb-0">
+                        Current Month
+                    </h4>
+
+                    <small class="text-muted">
+                        Your financial activity this month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+
+                    <div class="p-4 rounded-4" style="background:#F0FAF5;">
+
+                        <p class="text-muted mb-1">
+                            Income
+                        </p>
+
+                        <h4 class="fw-bold text-success mb-0">
+                            ₹ {{ "%.2f"|format(current_month.income) }}
+                        </h4>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="p-4 rounded-4" style="background:#FFF3F5;">
+
+                        <p class="text-muted mb-1">
+                            Expenses
+                        </p>
+
+                        <h4 class="fw-bold text-danger mb-0">
+                            ₹ {{ "%.2f"|format(current_month.expense) }}
+                        </h4>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="p-4 rounded-4" style="background:#EEF3FF;">
+
+                        <p class="text-muted mb-1">
+                            Balance
+                        </p>
+
+                        <h4 class="fw-bold text-primary mb-0">
+                            ₹ {{ "%.2f"|format(current_month.balance) }}
+                        </h4>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MONTHLY SUMMARY -->
+    <div class="card mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center gap-2 mb-4">
+
+                <i class="bi bi-calendar-range text-primary fs-4"></i>
+
+                <div>
+
+                    <h4 class="fw-bold mb-0">
+                        Monthly Summary
+                    </h4>
+
+                    <small class="text-muted">
+                        Income and expenses by month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            {% if monthly_summary %}
+
+                <div class="table-responsive">
+
+                    <table class="table align-middle mb-0">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Month
+                                </th>
+
+                                <th>
+                                    Income
+                                </th>
+
+                                <th>
+                                    Expenses
+                                </th>
+
+                                <th>
+                                    Balance
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for month in monthly_summary %}
+
+                                <tr>
+
+                                    <td class="fw-semibold">
+
+                                        {{ month.month }}
+
+                                    </td>
+
+
+                                    <td class="text-success fw-semibold">
+
+                                        ₹ {{ "%.2f"|format(month.income) }}
+
+                                    </td>
+
+
+                                    <td class="text-danger fw-semibold">
+
+                                        ₹ {{ "%.2f"|format(month.expense) }}
+
+                                    </td>
+
+
+                                    <td class="text-primary fw-semibold">
+
+                                        ₹ {{ "%.2f"|format(month.balance) }}
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="text-center py-5">
+
+                    <i class="bi bi-bar-chart fs-1 text-muted"></i>
+
+                    <h5 class="fw-bold mt-3">
+                        No monthly data yet
+                    </h5>
+
+                    <p class="text-muted mb-0">
+                        Add income and expenses to see your analytics.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- CATEGORY ANALYSIS -->
+    <div class="row g-4 mb-4">
+
+        <!-- EXPENSE CATEGORIES -->
+        <div class="col-lg-6">
+
+            <div class="card h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex align-items-center gap-2 mb-4">
+
+                        <i class="bi bi-pie-chart-fill text-danger fs-4"></i>
+
+                        <h4 class="fw-bold mb-0">
+                            Expense Categories
+                        </h4>
+
+                    </div>
+
+
+                    {% if expense_categories %}
+
+                        {% for item in expense_categories %}
+
+                            <div class="mb-4">
+
+                                <div class="d-flex justify-content-between mb-2">
+
+                                    <span class="fw-semibold">
+                                        {{ item.category }}
+                                    </span>
+
+                                    <span class="text-danger fw-semibold">
+                                        ₹ {{ "%.2f"|format(item.amount) }}
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    class="progress"
+                                    style="height:8px;"
+                                >
+
+                                    <div
+                                        class="progress-bar"
+                                        style="width: {{ ((item.amount / summary.total_expenses) * 100) if summary.total_expenses > 0 else 0 }}%;"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p class="text-muted mb-0">
+                            No expense category data available.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INCOME CATEGORIES -->
+        <div class="col-lg-6">
+
+            <div class="card h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex align-items-center gap-2 mb-4">
+
+                        <i class="bi bi-wallet-fill text-success fs-4"></i>
+
+                        <h4 class="fw-bold mb-0">
+                            Income Categories
+                        </h4>
+
+                    </div>
+
+
+                    {% if income_categories %}
+
+                        {% for item in income_categories %}
+
+                            <div class="mb-4">
+
+                                <div class="d-flex justify-content-between mb-2">
+
+                                    <span class="fw-semibold">
+                                        {{ item.category }}
+                                    </span>
+
+                                    <span class="text-success fw-semibold">
+                                        ₹ {{ "%.2f"|format(item.amount) }}
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    class="progress"
+                                    style="height:8px;"
+                                >
+
+                                    <div
+                                        class="progress-bar"
+                                        style="
+                                            width:
+                                            {{ ((item.amount / summary.total_income) * 100) if summary.total_income > 0 else 0 }}%;
+                                        "
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p class="text-muted mb-0">
+                            No income category data available.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FINANCIAL INSIGHT -->
+    <div class="card">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-start gap-3">
+
+                <div
+                    style="
+                        width:46px;
+                        height:46px;
+                        min-width:46px;
+                        border-radius:14px;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        background:#E8EEFF;
+                    "
+                >
+
+                    <i class="bi bi-lightbulb-fill text-primary"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h5 class="fw-bold mb-2">
+                        Financial Insight
+                    </h5>
+
+                    {% if summary.savings_rate >= 20 %}
+
+                        <p class="mb-0">
+                            Excellent work. Your current savings rate is
+                            <strong>{{ summary.savings_rate }}%</strong>.
+                            Keep maintaining healthy spending habits.
+                        </p>
+
+                    {% elif summary.savings_rate >= 10 %}
+
+                        <p class="mb-0">
+                            You are building a positive savings habit.
+                            Try gradually increasing your savings rate
+                            toward 20%.
+                        </p>
+
+                    {% elif summary.total_income > 0 %}
+
+                        <p class="mb-0">
+                            Your savings rate is currently
+                            <strong>{{ summary.savings_rate }}%</strong>.
+                            Review your largest expenses and look for
+                            opportunities to reduce unnecessary spending.
+                        </p>
+
+                    {% else %}
+
+                        <p class="mb-0">
+                            Add your income and expenses to receive
+                            personalized financial insights.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

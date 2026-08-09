@@ -1,0 +1,1595 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login | FinAI Pro
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   FINAI PRO LOGIN
+   ROYAL LIGHT LOGIN THEME
+   ========================================================= */
+
+.login-page {
+
+    min-height: calc(100vh - 76px);
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 35px 20px 55px;
+
+    background:
+        radial-gradient(
+            circle at 8% 20%,
+            rgba(65, 105, 225, 0.16),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 92% 75%,
+            rgba(109, 92, 231, 0.13),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #f8faff 0%,
+            #f1f5ff 50%,
+            #eef3ff 100%
+        ) !important;
+
+    color: #172033 !important;
+
+}
+
+
+/* =========================================================
+   LOGIN WRAPPER
+   ========================================================= */
+
+.login-wrapper {
+
+    width: 100%;
+
+    max-width: 1090px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.94
+        ) !important;
+
+    border:
+        1px solid
+        rgba(
+            65,
+            105,
+            225,
+            0.14
+        ) !important;
+
+    box-shadow:
+        0 30px 75px
+        rgba(
+            42,
+            60,
+            120,
+            0.15
+        );
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+}
+
+
+/* =========================================================
+   LEFT PANEL
+   ========================================================= */
+
+.login-info {
+
+    position: relative;
+
+    padding:
+        58px 52px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eef3ff 0%,
+            #f8f6ff 100%
+        ) !important;
+
+    color:
+        #172033 !important;
+
+}
+
+
+/* Decorative glow */
+
+.login-info::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 270px;
+
+    height: 270px;
+
+    right: -125px;
+
+    top: -120px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            65,
+            105,
+            225,
+            0.08
+        );
+
+    pointer-events: none;
+
+}
+
+
+.login-info::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+
+    height: 220px;
+
+    left: -120px;
+
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            109,
+            92,
+            231,
+            0.07
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 55px;
+
+}
+
+
+.brand-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4169e1,
+            #6d5ce7
+        ) !important;
+
+    color:
+        #ffffff !important;
+
+    font-size: 21px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(
+            65,
+            105,
+            225,
+            0.22
+        );
+
+}
+
+
+.brand-name {
+
+    margin: 0;
+
+    color:
+        #172033 !important;
+
+    font-size: 22px;
+
+    line-height: 1.1;
+
+    font-weight: 850;
+
+}
+
+
+.brand-subtitle {
+
+    margin: 4px 0 0;
+
+    color:
+        #64748b !important;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   WELCOME TEXT
+   ========================================================= */
+
+.welcome-title {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin:
+        0 0 14px;
+
+    color:
+        #172033 !important;
+
+    font-size:
+        clamp(
+            34px,
+            4vw,
+            46px
+        );
+
+    line-height:
+        1.08;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        -1.5px;
+
+}
+
+
+.welcome-title span {
+
+    color:
+        #4169e1 !important;
+
+}
+
+
+.welcome-description {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 450px;
+
+    margin:
+        0 0 42px;
+
+    color:
+        #64748b !important;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   FEATURES
+   ONLY THREE FEATURES
+   ========================================================= */
+
+.login-features {
+
+    position:
+        relative;
+
+    z-index: 2;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        22px;
+
+}
+
+
+.login-feature {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+}
+
+
+.feature-icon {
+
+    width:
+        47px;
+
+    height:
+        47px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        14px;
+
+    background:
+        #e4ebff !important;
+
+    color:
+        #4169e1 !important;
+
+    font-size:
+        18px;
+
+}
+
+
+.feature-content strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        #172033 !important;
+
+    font-size:
+        14px;
+
+    font-weight:
+        800;
+
+}
+
+
+.feature-content span {
+
+    color:
+        #64748b !important;
+
+    font-size:
+        12px;
+
+}
+
+
+/* =========================================================
+   RIGHT LOGIN PANEL
+   ========================================================= */
+
+.login-form-area {
+
+    padding:
+        60px 50px;
+
+    background:
+        #ffffff !important;
+
+    color:
+        #172033 !important;
+
+}
+
+
+/* =========================================================
+   LOGIN HEADER
+   ========================================================= */
+
+.login-heading {
+
+    margin-bottom:
+        30px;
+
+}
+
+
+.login-icon {
+
+    width:
+        52px;
+
+    height:
+        52px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        17px;
+
+    border-radius:
+        16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8eeff,
+            #f0edff
+        ) !important;
+
+    color:
+        #4169e1 !important;
+
+    font-size:
+        21px;
+
+}
+
+
+.login-heading h2 {
+
+    margin:
+        0 0 7px;
+
+    color:
+        #172033 !important;
+
+    font-size:
+        27px;
+
+    font-weight:
+        850;
+
+}
+
+
+.login-heading p {
+
+    margin:
+        0;
+
+    color:
+        #64748b !important;
+
+    font-size:
+        13px;
+
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.login-form {
+
+    width:
+        100%;
+
+}
+
+
+.form-group {
+
+    margin-bottom:
+        21px;
+
+}
+
+
+.form-label {
+
+    display:
+        block;
+
+    margin-bottom:
+        8px;
+
+    color:
+        #334155 !important;
+
+    font-size:
+        13px;
+
+    font-weight:
+        750;
+
+}
+
+
+.input-wrapper {
+
+    position:
+        relative;
+
+}
+
+
+.input-wrapper > i {
+
+    position:
+        absolute;
+
+    left:
+        15px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        #7d89a4 !important;
+
+    pointer-events:
+        none;
+
+    z-index:
+        2;
+
+}
+
+
+.login-input {
+
+    width:
+        100%;
+
+    height:
+        50px;
+
+    padding:
+        0 45px;
+
+    border:
+        1px solid
+        #d9e1f0 !important;
+
+    border-radius:
+        13px;
+
+    outline:
+        none;
+
+    background:
+        #f9faff !important;
+
+    color:
+        #172033 !important;
+
+    font-size:
+        14px;
+
+    box-shadow:
+        none !important;
+
+    transition:
+        all .2s ease;
+
+}
+
+
+.login-input::placeholder {
+
+    color:
+        #9aa6bc !important;
+
+}
+
+
+.login-input:focus {
+
+    background:
+        #ffffff !important;
+
+    color:
+        #172033 !important;
+
+    border-color:
+        #4169e1 !important;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(
+            65,
+            105,
+            225,
+            0.10
+        ) !important;
+
+}
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+.password-toggle {
+
+    position:
+        absolute;
+
+    right:
+        14px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    border:
+        none;
+
+    background:
+        transparent !important;
+
+    color:
+        #7d89a4 !important;
+
+    cursor:
+        pointer;
+
+    z-index:
+        5;
+
+}
+
+
+/* =========================================================
+   REMEMBER / FORGOT
+   ========================================================= */
+
+.login-options {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    margin:
+        5px 0 23px;
+
+    font-size:
+        12px;
+
+}
+
+
+.remember {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    color:
+        #64748b !important;
+
+}
+
+
+.remember input {
+
+    width:
+        15px;
+
+    height:
+        15px;
+
+    accent-color:
+        #4169e1;
+
+}
+
+
+.forgot-link {
+
+    color:
+        #4169e1 !important;
+
+    text-decoration:
+        none;
+
+    font-weight:
+        700;
+
+}
+
+
+/* =========================================================
+   SIGN IN BUTTON
+   ========================================================= */
+
+.login-button {
+
+    width:
+        100%;
+
+    height:
+        52px;
+
+    border:
+        none !important;
+
+    border-radius:
+        14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4169e1,
+            #6d5ce7
+        ) !important;
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        14px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 12px 28px
+        rgba(
+            65,
+            105,
+            225,
+            0.23
+        );
+
+    transition:
+        all .2s ease;
+
+}
+
+
+.login-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 17px 35px
+        rgba(
+            65,
+            105,
+            225,
+            0.28
+        );
+
+}
+
+
+.login-button:disabled {
+
+    opacity:
+        .70;
+
+    cursor:
+        wait;
+
+    transform:
+        none;
+
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.login-message {
+
+    display:
+        none;
+
+    margin-top:
+        15px;
+
+    padding:
+        11px 13px;
+
+    border-radius:
+        11px;
+
+    background:
+        #fff1f3 !important;
+
+    border:
+        1px solid
+        #ffd5dc !important;
+
+    color:
+        #b52d49 !important;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.5;
+
+}
+
+
+/* =========================================================
+   REGISTER
+   ========================================================= */
+
+.register-text {
+
+    margin-top:
+        25px;
+
+    text-align:
+        center;
+
+    color:
+        #64748b !important;
+
+    font-size:
+        13px;
+
+}
+
+
+.register-text a {
+
+    color:
+        #4169e1 !important;
+
+    text-decoration:
+        none;
+
+    font-weight:
+        800;
+
+}
+
+
+/* =========================================================
+   SECURITY
+   ========================================================= */
+
+.security-note {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        7px;
+
+    margin-top:
+        20px;
+
+    color:
+        #8792a8 !important;
+
+    font-size:
+        11px;
+
+}
+
+
+.security-note i {
+
+    color:
+        #4169e1 !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .login-wrapper {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .login-info {
+
+        padding:
+            40px;
+
+    }
+
+
+    .login-form-area {
+
+        padding:
+            40px;
+
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+    .login-page {
+
+        padding:
+            20px 12px;
+
+    }
+
+
+    .login-info {
+
+        padding:
+            30px 22px;
+
+    }
+
+
+    .login-form-area {
+
+        padding:
+            32px 22px;
+
+    }
+
+
+    .welcome-title {
+
+        font-size:
+            34px;
+
+    }
+
+
+    .login-options {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        gap:
+            10px;
+
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     LOGIN PAGE
+     ========================================================= -->
+
+<div class="login-page">
+
+    <div class="login-wrapper">
+
+
+        <!-- =================================================
+             LEFT SIDE
+             ================================================= -->
+
+        <section class="login-info">
+
+
+            <div class="brand">
+
+                <div class="brand-icon">
+
+                    <i class="bi bi-bar-chart-fill"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1 class="brand-name">
+                        FinAI Pro
+                    </h1>
+
+                    <p class="brand-subtitle">
+                        Smarter Finances, Brighter Future
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <h2 class="welcome-title">
+
+                Welcome to
+                <span>FinAI Pro</span>
+
+            </h2>
+
+
+            <p class="welcome-description">
+
+                Your intelligent financial control center.
+
+            </p>
+
+
+            <!-- =============================================
+                 THREE FEATURES ONLY
+                 ============================================= -->
+
+            <div class="login-features">
+
+
+                <!-- FEATURE 1 -->
+
+                <div class="login-feature">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-shield-lock-fill"></i>
+
+                    </div>
+
+
+                    <div class="feature-content">
+
+                        <strong>
+                            Secure Your Data
+                        </strong>
+
+                        <span>
+                            Bank-level security for your peace of mind
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FEATURE 2 -->
+
+                <div class="login-feature">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-bar-chart-fill"></i>
+
+                    </div>
+
+
+                    <div class="feature-content">
+
+                        <strong>
+                            Track Smarter
+                        </strong>
+
+                        <span>
+                            Monitor income, expenses & trends
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FEATURE 3 -->
+
+                <div class="login-feature">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-stars"></i>
+
+                    </div>
+
+
+                    <div class="feature-content">
+
+                        <strong>
+                            AI-Powered Insights
+                        </strong>
+
+                        <span>
+                            Personalized advice for a better tomorrow
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RIGHT SIDE
+             ================================================= -->
+
+        <section class="login-form-area">
+
+
+            <div class="login-heading">
+
+                <div class="login-icon">
+
+                    <i class="bi bi-lock-fill"></i>
+
+                </div>
+
+
+                <h2>
+                    Login to FinAI Pro
+                </h2>
+
+
+                <p>
+                    Continue your financial journey
+                </p>
+
+            </div>
+
+
+            <form
+                id="loginForm"
+                class="login-form"
+                method="post"
+                action="/login"
+            >
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="loginEmail"
+                    >
+                        Email Address
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-envelope"></i>
+
+
+                        <input
+                            id="loginEmail"
+                            name="email"
+                            type="email"
+                            class="login-input"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="loginPassword"
+                    >
+                        Password
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-lock"></i>
+
+
+                        <input
+                            id="loginPassword"
+                            name="password"
+                            type="password"
+                            class="login-input"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password"
+                        >
+
+                            <i class="bi bi-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPTIONS -->
+
+                <div class="login-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <a
+                        href="#"
+                        class="forgot-link"
+                        onclick="return false;"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                    id="loginButton"
+                >
+
+                    <i
+                        class="bi bi-box-arrow-in-right me-1">
+                    </i>
+
+                    Sign In
+
+                </button>
+
+
+                <div
+                    id="loginMessage"
+                    class="login-message"
+                ></div>
+
+
+            </form>
+
+
+            <!-- REGISTER -->
+
+            <div class="register-text">
+
+                Don't have an account?
+
+                <a href="/register">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <!-- SECURITY -->
+
+            <div class="security-note">
+
+                <i class="bi bi-shield-check"></i>
+
+                Secure FinAI Pro authentication
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   PASSWORD SHOW / HIDE
+   ========================================================= */
+
+const passwordInput =
+    document.getElementById(
+        "loginPassword"
+    );
+
+
+const passwordToggle =
+    document.getElementById(
+        "passwordToggle"
+    );
+
+
+if (
+    passwordInput &&
+    passwordToggle
+) {
+
+    passwordToggle.addEventListener(
+        "click",
+        function () {
+
+            if (
+                passwordInput.type ===
+                "password"
+            ) {
+
+                passwordInput.type =
+                    "text";
+
+                passwordToggle.innerHTML =
+                    '<i class="bi bi-eye-slash"></i>';
+
+            }
+
+            else {
+
+                passwordInput.type =
+                    "password";
+
+                passwordToggle.innerHTML =
+                    '<i class="bi bi-eye"></i>';
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   REMEMBER EMAIL
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const savedEmail =
+            localStorage.getItem(
+                "finai_remember_email"
+            );
+
+
+        if (savedEmail) {
+
+            const emailInput =
+                document.getElementById(
+                    "loginEmail"
+                );
+
+
+            const remember =
+                document.getElementById(
+                    "rememberMe"
+                );
+
+
+            if (emailInput) {
+
+                emailInput.value =
+                    savedEmail;
+
+            }
+
+
+            if (remember) {
+
+                remember.checked =
+                    true;
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOGIN FORM
+   ========================================================= */
+
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
+
+
+if (loginForm) {
+
+    loginForm.addEventListener(
+        "submit",
+        function () {
+
+            const remember =
+                document.getElementById(
+                    "rememberMe"
+                );
+
+
+            const email =
+                document.getElementById(
+                    "loginEmail"
+                );
+
+
+            if (
+                remember &&
+                email &&
+                remember.checked
+            ) {
+
+                localStorage.setItem(
+                    "finai_remember_email",
+                    email.value.trim()
+                );
+
+            }
+
+            else {
+
+                localStorage.removeItem(
+                    "finai_remember_email"
+                );
+
+            }
+
+
+            const loginButton =
+                document.getElementById(
+                    "loginButton"
+                );
+
+
+            if (loginButton) {
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.innerHTML =
+                    '<span class="spinner-border spinner-border-sm me-2"></span>' +
+                    'Signing In...';
+
+            }
+
+        }
+    );
+
+}
+
+</script>
+
+{% endblock %}

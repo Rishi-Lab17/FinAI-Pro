@@ -1,0 +1,439 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Financial Advisor | FinAI Pro
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold mb-1">
+
+                <i class="bi bi-robot text-primary me-2"></i>
+
+                AI Financial Advisor
+
+            </h2>
+
+            <p class="text-muted mb-0">
+
+                Get personalized financial insights based on your
+                income and spending.
+
+            </p>
+
+        </div>
+
+        <a href="/dashboard"
+           class="btn btn-outline-primary">
+
+            <i class="bi bi-speedometer2 me-1"></i>
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+
+    <!-- Financial Overview -->
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Total Income
+                    </p>
+
+                    <h3 class="fw-bold text-success">
+
+                        ₹{{ "%.2f"|format(financial_data.total_income|default(0)) }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Total Expenses
+                    </p>
+
+                    <h3 class="fw-bold text-danger">
+
+                        ₹{{ "%.2f"|format(financial_data.total_expenses|default(0)) }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Current Balance
+                    </p>
+
+                    <h3 class="fw-bold text-primary">
+
+                        ₹{{ "%.2f"|format(financial_data.balance|default(0)) }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <p class="text-muted mb-2">
+                        Savings Rate
+                    </p>
+
+                    <h3 class="fw-bold text-warning">
+
+                        {{ "%.1f"|format(financial_data.savings_rate|default(0)) }}%
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- AI Advisor -->
+
+    <div class="row g-4">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4 p-lg-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div
+                            class="rounded-circle bg-primary-subtle p-3 me-3">
+
+                            <i
+                                class="bi bi-robot text-primary fs-3">
+                            </i>
+
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-1">
+                                Your AI Financial Advice
+                            </h4>
+
+                            <p class="text-muted mb-0">
+                                Personalized recommendations from FinAI Pro.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if advice %}
+
+                        <div class="p-4 rounded-3 bg-light border">
+
+                            <div class="d-flex">
+
+                                <i
+                                    class="bi bi-lightbulb-fill text-warning fs-4 me-3">
+                                </i>
+
+                                <div>
+
+                                    <h6 class="fw-bold mb-2">
+                                        Financial Recommendation
+                                    </h6>
+
+                                    <div
+                                        class="text-muted"
+                                        style="white-space: pre-line;">
+
+                                        {{ advice }}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="text-center py-5">
+
+                            <i
+                                class="bi bi-chat-square-text fs-1 text-muted">
+                            </i>
+
+                            <h5 class="fw-bold mt-3">
+                                No advice available yet
+                            </h5>
+
+                            <p class="text-muted">
+                                Add some income and expense records
+                                to receive personalized advice.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Financial Health -->
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-4">
+
+                        <i class="bi bi-heart-pulse text-danger me-2"></i>
+
+                        Financial Health
+
+                    </h5>
+
+
+                    {% set savings =
+                        financial_data.savings_rate|default(0) %}
+
+
+                    <div class="text-center mb-4">
+
+                        <div
+                            class="rounded-circle bg-primary-subtle
+                                   d-inline-flex p-4">
+
+                            <div>
+
+                                <h2 class="fw-bold text-primary mb-0">
+
+                                    {{ "%.0f"|format(savings) }}%
+
+                                </h2>
+
+                                <small class="text-muted">
+                                    Savings
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <span class="text-muted">
+                                Savings Rate
+                            </span>
+
+                            <strong>
+                                {{ "%.1f"|format(savings) }}%
+                            </strong>
+
+                        </div>
+
+                        <div
+                            class="progress"
+                            style="height: 10px;">
+
+                            <div
+                                class="progress-bar bg-primary"
+                                role="progressbar"
+                                style="width: {{ [savings, 100]|min }}%;">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if savings >= 30 %}
+
+                        <div class="alert alert-success border-0">
+
+                            <i class="bi bi-check-circle me-2"></i>
+
+                            Excellent! Your savings rate is healthy.
+
+                        </div>
+
+                    {% elif savings >= 15 %}
+
+                        <div class="alert alert-warning border-0">
+
+                            <i class="bi bi-exclamation-circle me-2"></i>
+
+                            Your savings are reasonable. Try to improve them.
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="alert alert-danger border-0">
+
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+
+                            Consider reducing unnecessary expenses.
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Tips -->
+
+    <div class="row g-4 mt-1">
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <i class="bi bi-piggy-bank text-success fs-3"></i>
+
+                    <h6 class="fw-bold mt-3">
+                        Save Consistently
+                    </h6>
+
+                    <p class="text-muted small mb-0">
+
+                        Build a habit of saving a fixed percentage
+                        of your income every month.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <i class="bi bi-graph-down text-danger fs-3"></i>
+
+                    <h6 class="fw-bold mt-3">
+                        Control Spending
+                    </h6>
+
+                    <p class="text-muted small mb-0">
+
+                        Review your expense categories and reduce
+                        unnecessary spending.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <i class="bi bi-bullseye text-primary fs-3"></i>
+
+                    <h6 class="fw-bold mt-3">
+                        Set Financial Goals
+                    </h6>
+
+                    <p class="text-muted small mb-0">
+
+                        Use your financial data to plan realistic
+                        short-term and long-term goals.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,1151 @@
+﻿{% extends "base.html" %}
+
+{% block title %}
+Income | FinAI Pro
+{% endblock %}
+
+{% block head %}
+
+<style>
+
+/* =========================================================
+   FINAI INCOME PAGE
+   ========================================================= */
+
+.income-page {
+
+    min-height: calc(100vh - 75px);
+
+    padding: 35px 10px 60px;
+
+    animation:
+        incomeEnter .6s ease;
+
+}
+
+
+@keyframes incomeEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(22px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.income-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    border-radius: 27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.12),
+            rgba(255,255,255,.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.25);
+
+}
+
+
+.income-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 10%;
+
+    right: 10%;
+
+    top: 0;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            white,
+            transparent
+        );
+
+    opacity: .7;
+
+}
+
+
+.income-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    color:
+        rgba(255,255,255,.60);
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    letter-spacing: .5px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.income-title {
+
+    color: white;
+
+    font-size: 38px;
+
+    font-weight: 850;
+
+    letter-spacing: -1.2px;
+
+    margin: 0 0 7px;
+
+}
+
+
+.income-title span {
+
+    color:
+        rgba(255,255,255,.42);
+
+}
+
+
+.income-subtitle {
+
+    color:
+        rgba(255,255,255,.42);
+
+    margin: 0;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   ADD BUTTON
+   ========================================================= */
+
+.add-income-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #d5d5d5
+        );
+
+    color: #111 !important;
+
+    text-decoration: none;
+
+    font-weight: 800;
+
+    font-size: 13px;
+
+    border: none;
+
+    transition:
+        all .28s ease;
+
+}
+
+
+.add-income-btn:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 13px 30px
+        rgba(255,255,255,.15);
+
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+.income-stat {
+
+    padding: 23px;
+
+    height: 100%;
+
+    border-radius: 21px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    transition:
+        all .3s ease;
+
+}
+
+
+.income-stat:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(255,255,255,.22);
+
+}
+
+
+.income-stat-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    color: white;
+
+    margin-bottom: 15px;
+
+}
+
+
+.income-stat-label {
+
+    color:
+        rgba(255,255,255,.38);
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .6px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.income-stat-value {
+
+    color:
+        #c6ffd3;
+
+    font-size: 25px;
+
+    font-weight: 850;
+
+    margin: 0;
+
+}
+
+
+/* =========================================================
+   TRANSACTION CARD
+   ========================================================= */
+
+.income-table-card {
+
+    border-radius: 23px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.095),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 18px 55px
+        rgba(0,0,0,.20);
+
+}
+
+
+.income-table-header {
+
+    padding: 22px 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+
+.income-table-title {
+
+    color: white;
+
+    font-weight: 800;
+
+    margin: 0;
+
+}
+
+
+.income-table-subtitle {
+
+    color:
+        rgba(255,255,255,.35);
+
+    font-size: 11px;
+
+    margin: 4px 0 0;
+
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.income-table {
+
+    width: 100%;
+
+    margin: 0;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+}
+
+
+.income-table thead th {
+
+    color:
+        rgba(255,255,255,.35);
+
+    background:
+        rgba(0,0,0,.18);
+
+    border: none;
+
+    padding: 14px 18px;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .6px;
+
+    font-weight: 700;
+
+}
+
+
+.income-table tbody td {
+
+    color:
+        rgba(255,255,255,.68);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.055);
+
+    padding: 17px 18px;
+
+    font-size: 13px;
+
+    vertical-align: middle;
+
+}
+
+
+.income-row {
+
+    transition:
+        background .25s ease;
+
+}
+
+
+.income-row:hover {
+
+    background:
+        rgba(255,255,255,.045);
+
+}
+
+
+/* =========================================================
+   SOURCE
+   ========================================================= */
+
+.source-cell {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+}
+
+
+.source-icon {
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    color: #c7ffd3;
+
+}
+
+
+.source-name {
+
+    color: white;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.category-pill {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 10px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    color:
+        rgba(255,255,255,.58);
+
+    font-size: 10px;
+
+    font-weight: 650;
+
+}
+
+
+/* =========================================================
+   AMOUNT
+   ========================================================= */
+
+.income-amount {
+
+    color:
+        #baffca !important;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.action-btn {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    color:
+        rgba(255,255,255,.55);
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.action-btn:hover {
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.12);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.delete-btn:hover {
+
+    color:
+        #ffaaaa;
+
+    border-color:
+        rgba(255,100,100,.25);
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.income-empty {
+
+    padding: 65px 25px;
+
+    text-align: center;
+
+}
+
+
+.income-empty-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin:
+        0 auto 18px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    color: white;
+
+    font-size: 28px;
+
+}
+
+
+.income-empty-title {
+
+    color: white;
+
+    font-weight: 800;
+
+}
+
+
+.income-empty-text {
+
+    color:
+        rgba(255,255,255,.38);
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .income-page {
+
+        padding:
+            20px 8px 40px;
+
+    }
+
+    .income-hero {
+
+        padding: 24px;
+
+    }
+
+    .income-title {
+
+        font-size: 29px;
+
+    }
+
+    .income-table-card {
+
+        overflow-x: auto;
+
+    }
+
+    .income-table {
+
+        min-width: 720px;
+
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="income-page">
+
+<div class="container-fluid">
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="income-hero">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-4">
+
+            <div>
+
+                <div class="income-badge">
+
+                    <i class="bi bi-arrow-down-circle-fill"></i>
+
+                    INCOME MANAGEMENT
+
+                </div>
+
+
+                <h1 class="income-title">
+
+                    Track Your
+                    <span>Income</span>
+
+                </h1>
+
+
+                <p class="income-subtitle">
+
+                    Manage and monitor every source of money entering your finances.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="/income/add"
+                class="add-income-btn">
+
+                <i class="bi bi-plus-lg"></i>
+
+                Add Income
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SUMMARY
+         ===================================================== -->
+
+    <div class="row g-3 mb-4">
+
+
+        <div class="col-xl-4 col-md-6">
+
+            <div class="income-stat">
+
+                <div class="income-stat-icon">
+
+                    <i class="bi bi-wallet2"></i>
+
+                </div>
+
+
+                <div class="income-stat-label">
+
+                    Total Income
+
+                </div>
+
+
+                <h3 class="income-stat-value">
+
+                    ₹ {{ "%.2f"|format(
+                        income_list
+                        |map(attribute="amount")
+                        |sum
+                    ) }}
+
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-4 col-md-6">
+
+            <div class="income-stat">
+
+                <div class="income-stat-icon">
+
+                    <i class="bi bi-receipt"></i>
+
+                </div>
+
+
+                <div class="income-stat-label">
+
+                    Income Records
+
+                </div>
+
+
+                <h3 class="income-stat-value">
+
+                    {{ income_list|length }}
+
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-4 col-md-12">
+
+            <div class="income-stat">
+
+                <div class="income-stat-icon">
+
+                    <i class="bi bi-graph-up-arrow"></i>
+
+                </div>
+
+
+                <div class="income-stat-label">
+
+                    Financial Tracking
+
+                </div>
+
+
+                <h3 class="income-stat-value">
+
+                    Active
+
+                </h3>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         TRANSACTIONS
+         ===================================================== -->
+
+    <div class="income-table-card">
+
+
+        <div class="income-table-header">
+
+            <div>
+
+                <h4 class="income-table-title">
+
+                    Income History
+
+                </h4>
+
+                <p class="income-table-subtitle">
+
+                    Your recorded income transactions
+
+                </p>
+
+            </div>
+
+
+            <span class="category-pill">
+
+                <i class="bi bi-database me-1"></i>
+
+                {{ income_list|length }} Records
+
+            </span>
+
+        </div>
+
+
+        {% if income_list %}
+
+
+        <div class="table-responsive">
+
+            <table class="income-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Source
+                        </th>
+
+                        <th>
+                            Category
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for income in income_list %}
+
+                    <tr class="income-row">
+
+
+                        <td>
+
+                            <div class="source-cell">
+
+                                <div class="source-icon">
+
+                                    <i class="bi bi-cash-stack"></i>
+
+                                </div>
+
+
+                                <span class="source-name">
+
+                                    {{ income.source }}
+
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="category-pill">
+
+                                {{ income.category }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td class="income-amount">
+
+                            + ₹ {{ "%.2f"|format(income.amount) }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ income.income_date }}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if income.description %}
+
+                                {{ income.description }}
+
+                            {% else %}
+
+                                <span
+                                    style="
+                                    color:rgba(255,255,255,.25);
+                                    "
+                                >
+
+                                    —
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="d-flex gap-2">
+
+                                <a
+                                    href="/income/edit/{{ income.id }}"
+                                    class="action-btn"
+                                    title="Edit">
+
+                                    <i class="bi bi-pencil"></i>
+
+                                </a>
+
+
+                                <a
+                                    href="/income/delete/{{ income.id }}"
+                                    class="action-btn delete-btn"
+                                    title="Delete"
+                                    onclick="
+                                    return confirm(
+                                    'Are you sure you want to delete this income record?'
+                                    );
+                                    ">
+
+                                    <i class="bi bi-trash3"></i>
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="income-empty">
+
+            <div class="income-empty-icon">
+
+                <i class="bi bi-wallet2"></i>
+
+            </div>
+
+
+            <h4 class="income-empty-title">
+
+                No Income Recorded
+
+            </h4>
+
+
+            <p class="income-empty-text">
+
+                Start tracking your income to build
+                a complete picture of your finances.
+
+            </p>
+
+
+            <a
+                href="/income/add"
+                class="add-income-btn mt-2">
+
+                <i class="bi bi-plus-lg"></i>
+
+                Add Your First Income
+
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+</div>
+
+{% endblock %}

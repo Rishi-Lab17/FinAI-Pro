@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        FinAI Pro
+        {% endblock %}
+    </title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           FINAI PRO — ROYAL LIGHT THEME
+           ===================================================== */
+
+        :root {
+
+            --finai-primary: #4169E1;
+            --finai-primary-dark: #2948B8;
+            --finai-primary-light: #E8EEFF;
+
+            --finai-purple: #6D5CE7;
+
+            --finai-bg: #F4F7FF;
+            --finai-bg-soft: #EEF3FF;
+
+            --finai-card: rgba(255, 255, 255, 0.82);
+            --finai-card-solid: #FFFFFF;
+
+            --finai-text: #111827;
+            --finai-text-soft: #475569;
+            --finai-text-muted: #64748B;
+
+            --finai-border: rgba(65, 105, 225, 0.12);
+
+            --finai-success: #16865B;
+            --finai-danger: #C24156;
+
+            --finai-shadow:
+                0 18px 45px rgba(35, 58, 120, 0.10);
+
+            --finai-shadow-hover:
+                0 25px 60px rgba(35, 58, 120, 0.16);
+        }
+
+
+        /* =====================================================
+           BODY
+           ===================================================== */
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(65, 105, 225, 0.13),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 90% 15%,
+                    rgba(109, 92, 231, 0.10),
+                    transparent 28%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #F8FAFF 0%,
+                    #F1F5FF 50%,
+                    #EEF3FF 100%
+                );
+
+            color:
+                var(--finai-text);
+
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+           ===================================================== */
+
+        .finai-navbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+            background:
+                rgba(255, 255, 255, 0.78);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+
+            border-bottom:
+                1px solid
+                var(--finai-border);
+
+            box-shadow:
+                0 8px 30px
+                rgba(35, 58, 120, 0.07);
+
+        }
+
+
+        .finai-navbar-inner {
+
+            min-height: 76px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+
+        /* =====================================================
+           LOGO
+           ===================================================== */
+
+        .finai-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-decoration: none;
+
+            color:
+                var(--finai-text);
+
+            font-size: 1.25rem;
+
+            font-weight: 900;
+
+            white-space: nowrap;
+
+        }
+
+
+        .finai-logo-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4169E1,
+                    #6D5CE7
+                );
+
+            box-shadow:
+                0 10px 24px
+                rgba(65, 105, 225, 0.25);
+
+        }
+
+
+        .finai-logo:hover {
+
+            color:
+                var(--finai-primary-dark);
+
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+           ===================================================== */
+
+        .finai-nav {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .finai-nav-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                9px 13px;
+
+            border-radius:
+                13px;
+
+            text-decoration: none;
+
+            color:
+                var(--finai-text-soft);
+
+            font-size:
+                0.88rem;
+
+            font-weight:
+                700;
+
+            border:
+                1px solid transparent;
+
+            transition:
+                all 0.28s ease;
+
+        }
+
+
+        .finai-nav-link i {
+
+            font-size:
+                0.95rem;
+
+        }
+
+
+        .finai-nav-link:hover {
+
+            color:
+                var(--finai-primary-dark);
+
+            background:
+                rgba(65, 105, 225, 0.08);
+
+            border-color:
+                rgba(65, 105, 225, 0.10);
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(65, 105, 225, 0.08);
+
+        }
+
+
+        .finai-nav-link.ai-link:hover {
+
+            color:
+                var(--finai-purple);
+
+            background:
+                rgba(109, 92, 231, 0.09);
+
+        }
+
+
+        .finai-nav-link.logout {
+
+            color:
+                #C24156;
+
+        }
+
+
+        .finai-nav-link.logout:hover {
+
+            color:
+                #A52F43;
+
+            background:
+                rgba(194, 65, 86, 0.08);
+
+        }
+
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .finai-main {
+
+            min-height:
+                calc(100vh - 76px);
+
+            padding-top:
+                32px;
+
+            padding-bottom:
+                50px;
+
+            animation:
+                finaiPageEnter
+                0.55s
+                ease;
+
+        }
+
+
+        /* =====================================================
+           CARDS
+           ===================================================== */
+
+        .card {
+
+            background:
+                var(--finai-card) !important;
+
+            border:
+                1px solid
+                var(--finai-border) !important;
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            box-shadow:
+                var(--finai-shadow);
+
+            border-radius:
+                22px !important;
+
+            transition:
+                transform 0.30s ease,
+                box-shadow 0.30s ease,
+                border-color 0.30s ease;
+
+        }
+
+
+        .card:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                var(--finai-shadow-hover);
+
+            border-color:
+                rgba(65, 105, 225, 0.20)
+                !important;
+
+        }
+
+
+        /* =====================================================
+           TEXT
+           ===================================================== */
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+
+            color:
+                var(--finai-text);
+
+        }
+
+
+        p {
+
+            color:
+                var(--finai-text-soft);
+
+        }
+
+
+        .text-muted {
+
+            color:
+                var(--finai-text-muted)
+                !important;
+
+        }
+
+
+        .text-primary {
+
+            color:
+                var(--finai-primary)
+                !important;
+
+        }
+
+
+        .text-success {
+
+            color:
+                var(--finai-success)
+                !important;
+
+        }
+
+
+        .text-danger {
+
+            color:
+                var(--finai-danger)
+                !important;
+
+        }
+
+
+        /* =====================================================
+           BUTTONS
+           ===================================================== */
+
+        .btn-primary {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4169E1,
+                    #2948B8
+                )
+                !important;
+
+            border:
+                none !important;
+
+            color:
+                white !important;
+
+            border-radius:
+                13px;
+
+            font-weight:
+                750;
+
+            box-shadow:
+                0 10px 25px
+                rgba(65, 105, 225, 0.20);
+
+            transition:
+                all 0.25s ease;
+
+        }
+
+
+        .btn-primary:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 15px 32px
+                rgba(65, 105, 225, 0.28);
+
+        }
+
+
+        .btn-success {
+
+            background:
+                #16865B !important;
+
+            border:
+                none !important;
+
+        }
+
+
+        .btn-danger {
+
+            background:
+                #C24156 !important;
+
+            border:
+                none !important;
+
+        }
+
+
+        /* =====================================================
+           FORMS
+           ===================================================== */
+
+        .form-control,
+        .form-select {
+
+            background:
+                rgba(255, 255, 255, 0.90)
+                !important;
+
+            color:
+                var(--finai-text)
+                !important;
+
+            border:
+                1px solid
+                rgba(65, 105, 225, 0.14)
+                !important;
+
+            border-radius:
+                13px !important;
+
+            min-height:
+                46px;
+
+            transition:
+                all 0.25s ease;
+
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color:
+                var(--finai-primary)
+                !important;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(65, 105, 225, 0.10)
+                !important;
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        .form-control::placeholder {
+
+            color:
+                #94A3B8
+                !important;
+
+        }
+
+
+        .form-label {
+
+            color:
+                var(--finai-text-soft);
+
+            font-weight:
+                650;
+
+        }
+
+
+        /* =====================================================
+           TABLES
+           ===================================================== */
+
+        .table {
+
+            color:
+                var(--finai-text);
+
+        }
+
+
+        .table thead th {
+
+            color:
+                var(--finai-text-muted);
+
+            background:
+                rgba(65, 105, 225, 0.045);
+
+            border-bottom:
+                1px solid
+                var(--finai-border);
+
+        }
+
+
+        .table tbody td {
+
+            color:
+                var(--finai-text-soft);
+
+            border-color:
+                rgba(65, 105, 225, 0.07);
+
+        }
+
+
+        /* =====================================================
+           PROGRESS
+           ===================================================== */
+
+        .progress {
+
+            background:
+                #E5EAF7
+                !important;
+
+            border-radius:
+                50px;
+
+        }
+
+
+        .progress-bar {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #4169E1,
+                    #6D5CE7
+                )
+                !important;
+
+        }
+
+
+        /* =====================================================
+           ALERTS
+           ===================================================== */
+
+        .alert {
+
+            border:
+                none;
+
+            border-radius:
+                16px;
+
+        }
+
+
+        .alert-secondary {
+
+            background:
+                rgba(65, 105, 225, 0.07);
+
+            color:
+                var(--finai-text-soft);
+
+        }
+
+
+        /* =====================================================
+           PAGE ANIMATION
+           ===================================================== */
+
+        @keyframes finaiPageEnter {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(14px);
+
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           FLOATING BACKGROUND
+           ===================================================== */
+
+        .finai-background-orb {
+
+            position:
+                fixed;
+
+            width:
+                280px;
+
+            height:
+                280px;
+
+            border-radius:
+                50%;
+
+            pointer-events:
+                none;
+
+            z-index:
+                -1;
+
+            filter:
+                blur(80px);
+
+            opacity:
+                0.28;
+
+        }
+
+
+        .finai-orb-one {
+
+            top:
+                10%;
+
+            left:
+                -100px;
+
+            background:
+                #6D8FEA;
+
+        }
+
+
+        .finai-orb-two {
+
+            right:
+                -100px;
+
+            bottom:
+                10%;
+
+            background:
+                #A68BFF;
+
+        }
+
+
+        /* =====================================================
+           SCROLLBAR
+           ===================================================== */
+
+        ::-webkit-scrollbar {
+
+            width:
+                8px;
+
+        }
+
+
+        ::-webkit-scrollbar-track {
+
+            background:
+                #EEF2FF;
+
+        }
+
+
+        ::-webkit-scrollbar-thumb {
+
+            background:
+                #AAB8E8;
+
+            border-radius:
+                20px;
+
+        }
+
+
+        ::-webkit-scrollbar-thumb:hover {
+
+            background:
+                #4169E1;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 992px) {
+
+            .finai-navbar-inner {
+
+                flex-direction:
+                    column;
+
+                padding-top:
+                    14px;
+
+                padding-bottom:
+                    14px;
+
+            }
+
+
+            .finai-nav {
+
+                width:
+                    100%;
+
+                justify-content:
+                    center;
+
+            }
+
+        }
+
+
+        @media (max-width: 576px) {
+
+            .finai-nav-link {
+
+                padding:
+                    8px 10px;
+
+                font-size:
+                    0.78rem;
+
+            }
+
+
+            .finai-nav-link span {
+
+                display:
+                    none;
+
+            }
+
+
+            .finai-main {
+
+                padding-top:
+                    20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Background effects -->
+
+    <div class="finai-background-orb finai-orb-one"></div>
+
+    <div class="finai-background-orb finai-orb-two"></div>
+
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <nav class="finai-navbar">
+
+        <div class="container-fluid px-4">
+
+            <div class="finai-navbar-inner">
+
+
+                <!-- Logo -->
+
+                <a
+                    href="/dashboard"
+                    class="finai-logo"
+                >
+
+                    <div class="finai-logo-icon">
+
+                        <i class="bi bi-wallet2"></i>
+
+                    </div>
+
+                    <span>
+                        FinAI Pro
+                    </span>
+
+                </a>
+
+
+                <!-- Navigation -->
+
+                <div class="finai-nav">
+
+
+                    <a
+                        href="/dashboard"
+                        class="finai-nav-link"
+                    >
+
+                        <i class="bi bi-grid-1x2-fill"></i>
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/income"
+                        class="finai-nav-link"
+                    >
+
+                        <i class="bi bi-arrow-down-circle-fill"></i>
+
+                        <span>
+                            Income
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/expense"
+                        class="finai-nav-link"
+                    >
+
+                        <i class="bi bi-arrow-up-circle-fill"></i>
+
+                        <span>
+                            Expenses
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/analytics"
+                        class="finai-nav-link"
+                    >
+
+                        <i class="bi bi-bar-chart-fill"></i>
+
+                        <span>
+                            Analytics
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/ai-advisor"
+                        class="finai-nav-link ai-link"
+                    >
+
+                        <i class="bi bi-robot"></i>
+
+                        <span>
+                            AI Advisor
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/ai-challenge"
+                        class="finai-nav-link ai-link"
+                    >
+
+                        <i class="bi bi-trophy-fill"></i>
+
+                        <span>
+                            Challenge
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/ocr"
+                        class="finai-nav-link"
+                    >
+
+                        <i class="bi bi-receipt"></i>
+
+                        <span>
+                            OCR
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/profile"
+                        class="finai-nav-link"
+                    >
+
+                        <i class="bi bi-person-circle"></i>
+
+                        <span>
+                            Profile
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/logout"
+                        class="finai-nav-link logout"
+                    >
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        <span>
+                            Logout
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="finai-main">
+
+        <div class="container-fluid px-4">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+
+    </main>
+
+
+    <!-- Bootstrap JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+
+    <!-- FinAI page interaction -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const links =
+                    document.querySelectorAll(
+                        ".finai-nav-link"
+                    );
+
+
+                links.forEach(
+                    function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            function () {
+
+                                document.body.style.opacity =
+                                    "0.92";
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

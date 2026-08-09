@@ -1,0 +1,1521 @@
+{% extends "base.html" %}
+
+{% block title %}
+Receipt Scanner | FinAI Pro
+{% endblock %}
+
+
+{% block head %}
+
+<style>
+
+/* =========================================================
+   FINAI OCR SCANNER
+   ========================================================= */
+
+.ocr-page {
+
+    min-height: calc(100vh - 75px);
+
+    padding: 35px 10px 60px;
+
+    animation:
+        ocrEnter .65s ease;
+
+}
+
+
+@keyframes ocrEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.ocr-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    border-radius: 27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.12),
+            rgba(255,255,255,.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.25);
+
+}
+
+
+.ocr-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 10%;
+
+    right: 10%;
+
+    top: 0;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            white,
+            transparent
+        );
+
+    opacity: .7;
+
+}
+
+
+.ocr-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    color:
+        rgba(255,255,255,.60);
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    letter-spacing: .5px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.ocr-title {
+
+    color: white;
+
+    font-size: 38px;
+
+    font-weight: 850;
+
+    letter-spacing: -1.2px;
+
+    margin: 0 0 7px;
+
+}
+
+
+.ocr-title span {
+
+    color:
+        rgba(255,255,255,.40);
+
+}
+
+
+.ocr-subtitle {
+
+    color:
+        rgba(255,255,255,.42);
+
+    margin: 0;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   GLASS CARD
+   ========================================================= */
+
+.ocr-card {
+
+    border-radius: 23px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.095),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 18px 55px
+        rgba(0,0,0,.20);
+
+}
+
+
+.ocr-card-body {
+
+    padding: 30px;
+
+}
+
+
+/* =========================================================
+   UPLOAD AREA
+   ========================================================= */
+
+.upload-area {
+
+    border:
+        2px dashed
+        rgba(255,255,255,.18);
+
+    border-radius: 22px;
+
+    padding: 45px 25px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:
+        all .3s ease;
+
+}
+
+
+.upload-area:hover {
+
+    background:
+        rgba(255,255,255,.06);
+
+    border-color:
+        rgba(255,255,255,.40);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.upload-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 23px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #aaaaaa
+        );
+
+    color: #111;
+
+    font-size: 31px;
+
+}
+
+
+.upload-title {
+
+    color: white;
+
+    font-weight: 800;
+
+}
+
+
+.upload-text {
+
+    color:
+        rgba(255,255,255,.38);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   SCAN BUTTON
+   ========================================================= */
+
+.scan-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 15px;
+
+    padding: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #cfcfcf
+        );
+
+    color: #111;
+
+    font-weight: 850;
+
+    transition:
+        all .28s ease;
+
+}
+
+
+.scan-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(255,255,255,.12);
+
+}
+
+
+/* =========================================================
+   INFORMATION STEPS
+   ========================================================= */
+
+.step {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.step-number {
+
+    width: 36px;
+
+    height: 36px;
+
+    min-width: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.step-title {
+
+    color: white;
+
+    font-weight: 750;
+
+    font-size: 13px;
+
+    margin-bottom: 3px;
+
+}
+
+
+.step-text {
+
+    color:
+        rgba(255,255,255,.35);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    margin: 0;
+
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.result-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.result-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #aaaaaa
+        );
+
+    color: #111;
+
+    font-size: 22px;
+
+}
+
+
+.result-title {
+
+    color: white;
+
+    font-weight: 850;
+
+    margin: 0 0 3px;
+
+}
+
+
+.result-subtitle {
+
+    color:
+        rgba(255,255,255,.38);
+
+    font-size: 11px;
+
+    margin: 0;
+
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-label {
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.ocr-input {
+
+    width: 100%;
+
+    border-radius: 13px;
+
+    padding: 11px 13px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    color: white;
+
+    outline: none;
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.ocr-input:focus {
+
+    border-color:
+        rgba(255,255,255,.35);
+
+    background:
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(255,255,255,.035);
+
+}
+
+
+.ocr-input::placeholder {
+
+    color:
+        rgba(255,255,255,.25);
+
+}
+
+
+/* =========================================================
+   ADD EXPENSE
+   ========================================================= */
+
+.add-expense-button {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 15px;
+
+    padding: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #cfcfcf
+        );
+
+    color: #111;
+
+    font-weight: 850;
+
+    transition:
+        all .28s ease;
+
+}
+
+
+.add-expense-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(255,255,255,.13);
+
+}
+
+
+/* =========================================================
+   PREVIEW
+   ========================================================= */
+
+.receipt-preview {
+
+    max-height: 350px;
+
+    width: 100%;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.ocr-error {
+
+    padding: 14px 18px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,80,80,.08);
+
+    border:
+        1px solid
+        rgba(255,100,100,.16);
+
+    color:
+        #ffbaba;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .ocr-page {
+
+        padding:
+            20px 8px 40px;
+
+    }
+
+    .ocr-hero {
+
+        padding: 24px;
+
+    }
+
+    .ocr-title {
+
+        font-size: 29px;
+
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="ocr-page">
+
+<div class="container-fluid">
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <div class="ocr-hero">
+
+        <div class="ocr-badge">
+
+            <i class="bi bi-stars"></i>
+
+            AI RECEIPT INTELLIGENCE
+
+        </div>
+
+
+        <h1 class="ocr-title">
+
+            Scan Your
+            <span>Receipt</span>
+
+        </h1>
+
+
+        <p class="ocr-subtitle">
+
+            Let FinAI extract transaction details from your receipt
+            and turn them into an expense in seconds.
+
+        </p>
+
+    </div>
+
+
+    {% if error %}
+
+    <div class="ocr-error mb-4">
+
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         UPLOAD + INFORMATION
+         ===================================================== -->
+
+    <div class="row g-4">
+
+
+        <div class="col-lg-7">
+
+            <div class="ocr-card h-100">
+
+                <div class="ocr-card-body">
+
+
+                    <div class="text-center mb-4">
+
+                        <h4
+                            style="
+                            color:white;
+                            font-weight:800;
+                            "
+                        >
+
+                            Upload Receipt
+
+                        </h4>
+
+                        <p
+                            style="
+                            color:rgba(255,255,255,.38);
+                            font-size:12px;
+                            "
+                        >
+
+                            JPG, JPEG, PNG or WEBP
+
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        method="POST"
+                        action="/ocr"
+                        enctype="multipart/form-data"
+                        id="ocr-form"
+                    >
+
+
+                        <label
+                            for="receipt-file"
+                            class="w-100"
+                        >
+
+                            <div
+                                id="upload-area"
+                                class="upload-area"
+                            >
+
+                                <div class="upload-icon">
+
+                                    <i class="bi bi-camera"></i>
+
+                                </div>
+
+
+                                <h5 class="upload-title">
+
+                                    Choose Receipt Image
+
+                                </h5>
+
+
+                                <p class="upload-text">
+
+                                    Click here to select your receipt.
+
+                                </p>
+
+
+                                <small
+                                    style="
+                                    color:rgba(255,255,255,.25);
+                                    "
+                                >
+
+                                    Clear and well-lit images give better results.
+
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="receipt-file"
+                            name="file"
+                            accept=".jpg,.jpeg,.png,.webp"
+                            class="d-none"
+                            required
+                        >
+
+
+                        <div
+                            id="selected-file"
+                            class="d-none mt-3"
+                            style="
+                            color:rgba(255,255,255,.55);
+                            font-size:12px;
+                            "
+                        >
+
+                            <i class="bi bi-file-earmark-image me-2"></i>
+
+                            <span id="file-name"></span>
+
+                        </div>
+
+
+                        <div
+                            id="preview-container"
+                            class="d-none mt-4"
+                        >
+
+                            <p
+                                style="
+                                color:rgba(255,255,255,.55);
+                                font-size:11px;
+                                font-weight:700;
+                                "
+                            >
+
+                                RECEIPT PREVIEW
+
+                            </p>
+
+
+                            <img
+                                id="receipt-preview"
+                                src=""
+                                alt="Receipt Preview"
+                                class="receipt-preview"
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            id="scan-button"
+                            class="scan-button mt-4"
+                        >
+
+                            <i class="bi bi-stars me-2"></i>
+
+                            Scan Receipt
+
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-5">
+
+            <div class="ocr-card h-100">
+
+                <div class="ocr-card-body">
+
+
+                    <h5
+                        style="
+                        color:white;
+                        font-weight:800;
+                        margin-bottom:22px;
+                        "
+                    >
+
+                        <i class="bi bi-magic me-2"></i>
+
+                        How FinAI Works
+
+                    </h5>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+
+                            01
+
+                        </div>
+
+                        <div>
+
+                            <div class="step-title">
+
+                                Upload
+
+                            </div>
+
+                            <p class="step-text">
+
+                                Select a clear receipt image from your computer.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+
+                            02
+
+                        </div>
+
+                        <div>
+
+                            <div class="step-title">
+
+                                OCR Processing
+
+                            </div>
+
+                            <p class="step-text">
+
+                                Tesseract OCR extracts text and financial details.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+
+                            03
+
+                        </div>
+
+                        <div>
+
+                            <div class="step-title">
+
+                                AI Classification
+
+                            </div>
+
+                            <p class="step-text">
+
+                                FinAI identifies the amount, date and expense category.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step mb-0">
+
+                        <div class="step-number">
+
+                            04
+
+                        </div>
+
+                        <div>
+
+                            <div class="step-title">
+
+                                Add Expense
+
+                            </div>
+
+                            <p class="step-text">
+
+                                Review the extracted information and save it directly.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         OCR RESULT
+         ===================================================== -->
+
+    {% if receipt_data %}
+
+    <div class="ocr-card mt-4">
+
+        <div class="ocr-card-body">
+
+
+            <div class="result-header">
+
+                <div class="result-icon">
+
+                    <i class="bi bi-check-lg"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h4 class="result-title">
+
+                        Receipt Processed
+
+                    </h4>
+
+                    <p class="result-subtitle">
+
+                        Review the extracted information before adding it as an expense.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if receipt_data is mapping %}
+
+
+            <form
+                method="POST"
+                action="/ocr/add-expense"
+                id="add-expense-form"
+            >
+
+
+                <div class="row g-4">
+
+
+                    <!-- TITLE -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Merchant / Title
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            class="ocr-input"
+                            value="{{ receipt_data.title or 'Receipt Expense' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Category
+
+                        </label>
+
+                        <select
+                            name="category"
+                            class="ocr-input"
+                            required
+                        >
+
+                            {% set detected_category = receipt_data.category or "Other" %}
+
+
+                            <option
+                                value="Food"
+                                {% if detected_category == "Food" %}selected{% endif %}
+                            >
+
+                                Food
+
+                            </option>
+
+
+                            <option
+                                value="Shopping"
+                                {% if detected_category == "Shopping" %}selected{% endif %}
+                            >
+
+                                Shopping
+
+                            </option>
+
+
+                            <option
+                                value="Healthcare"
+                                {% if detected_category == "Healthcare" %}selected{% endif %}
+                            >
+
+                                Healthcare
+
+                            </option>
+
+
+                            <option
+                                value="Travel"
+                                {% if detected_category == "Travel" %}selected{% endif %}
+                            >
+
+                                Travel
+
+                            </option>
+
+
+                            <option
+                                value="Education"
+                                {% if detected_category == "Education" %}selected{% endif %}
+                            >
+
+                                Education
+
+                            </option>
+
+
+                            <option
+                                value="Entertainment"
+                                {% if detected_category == "Entertainment" %}selected{% endif %}
+                            >
+
+                                Entertainment
+
+                            </option>
+
+
+                            <option
+                                value="Other"
+                                {% if detected_category == "Other" %}selected{% endif %}
+                            >
+
+                                Other
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- AMOUNT -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Amount (₹)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            name="amount"
+                            class="ocr-input"
+                            step="0.01"
+                            min="0"
+                            value="{{ receipt_data.amount or '' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PAYMENT -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Payment Method
+
+                        </label>
+
+                        <select
+                            name="payment_method"
+                            class="ocr-input"
+                            required
+                        >
+
+                            <option value="UPI">
+
+                                UPI
+
+                            </option>
+
+                            <option value="Cash">
+
+                                Cash
+
+                            </option>
+
+                            <option value="Debit Card">
+
+                                Debit Card
+
+                            </option>
+
+                            <option value="Credit Card">
+
+                                Credit Card
+
+                            </option>
+
+                            <option value="Bank Transfer">
+
+                                Bank Transfer
+
+                            </option>
+
+                            <option value="Other">
+
+                                Other
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATE -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Expense Date
+
+                        </label>
+
+                        <input
+                            type="date"
+                            name="expense_date"
+                            class="ocr-input"
+                            value="{% if receipt_data.expense_date %}{{ receipt_data.expense_date.strftime('%Y-%m-%d') }}{% else %}{{ now().strftime('%Y-%m-%d') }}{% endif %}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Description
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="description"
+                            class="ocr-input"
+                            value="Added from scanned receipt"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="add-expense-button mt-4"
+                >
+
+                    <i class="bi bi-plus-circle-fill me-2"></i>
+
+                    Add as Expense
+
+                </button>
+
+
+            </form>
+
+
+            <!-- RAW OCR -->
+
+            {% if receipt_data.raw_text %}
+
+            <details class="mt-4">
+
+                <summary
+                    style="
+                    cursor:pointer;
+                    color:rgba(255,255,255,.40);
+                    font-size:11px;
+                    "
+                >
+
+                    View raw OCR text
+
+                </summary>
+
+
+                <pre
+                    style="
+                    margin-top:15px;
+                    padding:18px;
+                    border-radius:15px;
+                    background:rgba(0,0,0,.20);
+                    border:1px solid rgba(255,255,255,.07);
+                    color:rgba(255,255,255,.50);
+                    font-size:11px;
+                    white-space:pre-wrap;
+                    "
+                >{{ receipt_data.raw_text }}</pre>
+
+            </details>
+
+            {% endif %}
+
+
+            {% else %}
+
+            <div
+                style="
+                color:rgba(255,255,255,.55);
+                "
+            >
+
+                {{ receipt_data }}
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+</div>
+
+
+<script>
+
+const fileInput =
+    document.getElementById("receipt-file");
+
+const fileName =
+    document.getElementById("file-name");
+
+const selectedFile =
+    document.getElementById("selected-file");
+
+const previewContainer =
+    document.getElementById("preview-container");
+
+const preview =
+    document.getElementById("receipt-preview");
+
+const form =
+    document.getElementById("ocr-form");
+
+const scanButton =
+    document.getElementById("scan-button");
+
+
+if (fileInput) {
+
+    fileInput.addEventListener(
+        "change",
+        function () {
+
+            const file =
+                this.files[0];
+
+            if (!file) {
+
+                selectedFile.classList.add(
+                    "d-none"
+                );
+
+                previewContainer.classList.add(
+                    "d-none"
+                );
+
+                return;
+
+            }
+
+
+            fileName.textContent =
+                file.name;
+
+            selectedFile.classList.remove(
+                "d-none"
+            );
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event) {
+
+                    preview.src =
+                        event.target.result;
+
+                    previewContainer.classList.remove(
+                        "d-none"
+                    );
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+if (form) {
+
+    form.addEventListener(
+        "submit",
+        function() {
+
+            scanButton.disabled =
+                true;
+
+            scanButton.innerHTML =
+                '<span class="spinner-border spinner-border-sm me-2"></span>' +
+                'Processing Receipt...';
+
+        }
+    );
+
+}
+
+</script>
+
+{% endblock %}

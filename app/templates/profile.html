@@ -1,0 +1,429 @@
+{% extends "base.html" %}
+
+{% block title %}
+Profile | FinAI Pro
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">
+                <i class="bi bi-person-circle text-primary me-2"></i>
+                My Profile
+            </h2>
+
+            <p class="text-muted mb-0">
+                Manage your personal information and account security.
+            </p>
+        </div>
+
+        <a href="/dashboard"
+           class="btn btn-outline-primary">
+
+            <i class="bi bi-speedometer2 me-1"></i>
+            Dashboard
+
+        </a>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <!-- Profile Information -->
+
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4 p-lg-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div
+                            class="rounded-circle bg-primary-subtle p-3 me-3">
+
+                            <i class="bi bi-person text-primary fs-3"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-1">
+                                Personal Information
+                            </h4>
+
+                            <p class="text-muted mb-0">
+                                Update your profile details.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form method="POST"
+                          action="/profile/update">
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="full_name"
+                                class="form-control form-control-lg"
+                                value="{{ user.full_name }}"
+                                placeholder="Enter your full name"
+                                required>
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control form-control-lg"
+                                value="{{ user.email }}"
+                                disabled>
+
+                            <div class="form-text">
+                                Email address cannot be changed here.
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-grid">
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary btn-lg">
+
+                                <i class="bi bi-check-circle me-2"></i>
+
+                                Save Profile
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Account Information -->
+
+        <div class="col-lg-5">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-4">
+
+                        <i class="bi bi-person-badge text-primary me-2"></i>
+
+                        Account Information
+
+                    </h5>
+
+
+                    <div class="mb-4">
+
+                        <small class="text-muted">
+                            Name
+                        </small>
+
+                        <div class="fw-semibold mt-1">
+
+                            {{ user.full_name }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <small class="text-muted">
+                            Email
+                        </small>
+
+                        <div class="fw-semibold mt-1">
+
+                            {{ user.email }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <small class="text-muted">
+                            Account Status
+                        </small>
+
+                        <div class="mt-1">
+
+                            {% if user.is_active %}
+
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle me-1"></i>
+                                    Active
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-danger">
+                                    <i class="bi bi-x-circle me-1"></i>
+                                    Inactive
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <small class="text-muted">
+                            User ID
+                        </small>
+
+                        <div class="fw-semibold mt-1">
+
+                            #{{ user.id }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Change Password -->
+
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4 p-lg-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div
+                            class="rounded-circle bg-warning-subtle p-3 me-3">
+
+                            <i class="bi bi-shield-lock text-warning fs-3"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-1">
+                                Change Password
+                            </h4>
+
+                            <p class="text-muted mb-0">
+                                Keep your account secure with a strong password.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form method="POST"
+                          action="/profile/password">
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                name="current_password"
+                                class="form-control"
+                                placeholder="Enter current password"
+                                required>
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                name="new_password"
+                                class="form-control"
+                                placeholder="Enter new password"
+                                minlength="6"
+                                required>
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Confirm New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                name="confirm_password"
+                                class="form-control"
+                                placeholder="Confirm new password"
+                                minlength="6"
+                                required>
+
+                        </div>
+
+
+                        <div class="d-grid">
+
+                            <button
+                                type="submit"
+                                class="btn btn-warning btn-lg">
+
+                                <i class="bi bi-key me-2"></i>
+
+                                Change Password
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Security -->
+
+        <div class="col-lg-5">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-4">
+
+                        <i class="bi bi-shield-check text-success me-2"></i>
+
+                        Account Security
+
+                    </h5>
+
+
+                    <div class="alert alert-success border-0">
+
+                        <i class="bi bi-check-circle-fill me-2"></i>
+
+                        Your account is protected by password authentication.
+
+                    </div>
+
+
+                    <div class="d-flex align-items-start mb-3">
+
+                        <i class="bi bi-lock-fill text-success fs-4 me-3"></i>
+
+                        <div>
+
+                            <h6 class="fw-bold mb-1">
+                                Secure Authentication
+                            </h6>
+
+                            <p class="text-muted small mb-0">
+                                Your password is securely stored and verified.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="d-flex align-items-start mb-3">
+
+                        <i class="bi bi-database-lock text-primary fs-4 me-3"></i>
+
+                        <div>
+
+                            <h6 class="fw-bold mb-1">
+                                Protected Data
+                            </h6>
+
+                            <p class="text-muted small mb-0">
+                                Your financial information belongs only to your account.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="d-flex align-items-start">
+
+                        <i class="bi bi-person-check-fill text-warning fs-4 me-3"></i>
+
+                        <div>
+
+                            <h6 class="fw-bold mb-1">
+                                Active Account
+                            </h6>
+
+                            <p class="text-muted small mb-0">
+                                You are currently signed in to FinAI Pro.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,1257 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Challenge | FinAI Pro
+{% endblock %}
+
+
+{% block head %}
+
+<style>
+
+/* =========================================================
+   FINAI AI CHALLENGE
+   Premium glassmorphism UI
+   ========================================================= */
+
+.challenge-page {
+
+    min-height: calc(100vh - 75px);
+
+    padding: 35px 10px 60px;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+.challenge-page::before {
+
+    content: "";
+
+    position: fixed;
+
+    width: 480px;
+
+    height: 480px;
+
+    top: 30px;
+
+    right: -180px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.11),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+
+}
+
+
+.challenge-page::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 420px;
+
+    height: 420px;
+
+    bottom: -180px;
+
+    left: -150px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.08),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+   PAGE ANIMATION
+   ========================================================= */
+
+.challenge-container {
+
+    animation:
+        challengeEnter .7s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+@keyframes challengeEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(28px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.challenge-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    padding: 34px;
+
+    margin-bottom: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.12),
+            rgba(255,255,255,0.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.14);
+
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,0.25);
+
+}
+
+
+.challenge-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 12%;
+
+    width: 76%;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            white,
+            transparent
+        );
+
+    opacity: .7;
+
+}
+
+
+.challenge-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.13);
+
+    color:
+        rgba(255,255,255,0.72);
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    letter-spacing: .5px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.challenge-badge i {
+
+    color: white;
+
+    animation:
+        trophyPulse 2s infinite;
+
+}
+
+
+@keyframes trophyPulse {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.15)
+            rotate(-5deg);
+
+    }
+
+}
+
+
+.challenge-title {
+
+    color: white;
+
+    font-size: clamp(29px, 4vw, 43px);
+
+    font-weight: 850;
+
+    letter-spacing: -1.4px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.challenge-title span {
+
+    color:
+        rgba(255,255,255,0.43);
+
+}
+
+
+.challenge-description {
+
+    color:
+        rgba(255,255,255,0.48);
+
+    max-width: 680px;
+
+    line-height: 1.7;
+
+    margin: 0;
+
+}
+
+
+/* =========================================================
+   PROFILE CARD
+   ========================================================= */
+
+.profile-card {
+
+    padding: 25px;
+
+}
+
+
+.profile-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.profile-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            white,
+            #aaa
+        );
+
+    color: #111;
+
+    font-size: 23px;
+
+}
+
+
+.profile-title {
+
+    color: white;
+
+    font-weight: 800;
+
+    margin: 0 0 4px;
+
+}
+
+
+.profile-subtitle {
+
+    color:
+        rgba(255,255,255,0.38);
+
+    font-size: 12px;
+
+    margin: 0;
+
+}
+
+
+/* =========================================================
+   GLASS CARD
+   ========================================================= */
+
+.challenge-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    height: 100%;
+
+    border-radius: 23px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.105),
+            rgba(255,255,255,0.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.11);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,0.18);
+
+    transition:
+        all .3s ease;
+
+}
+
+
+.challenge-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(255,255,255,0.24);
+
+    box-shadow:
+        0 25px 60px
+        rgba(0,0,0,0.30);
+
+}
+
+
+.challenge-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 110px;
+
+    height: 110px;
+
+    border-radius: 50%;
+
+    right: -55px;
+
+    top: -55px;
+
+    background:
+        rgba(255,255,255,0.04);
+
+}
+
+
+/* =========================================================
+   CHALLENGE HEADER
+   ========================================================= */
+
+.challenge-card-body {
+
+    padding: 27px;
+
+}
+
+
+.challenge-number {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    color: white;
+
+    font-weight: 850;
+
+    font-size: 17px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.challenge-card-title {
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    margin-bottom: 9px;
+
+}
+
+
+.challenge-card-description {
+
+    color:
+        rgba(255,255,255,0.46);
+
+    font-size: 13px;
+
+    line-height: 1.65;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =========================================================
+   CHALLENGE TYPE
+   ========================================================= */
+
+.challenge-tag {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 6px 10px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    color:
+        rgba(255,255,255,0.55);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   PROGRESS / DIFFICULTY
+   ========================================================= */
+
+.challenge-progress {
+
+    margin-top: 18px;
+
+}
+
+
+.progress-label {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color:
+        rgba(255,255,255,0.38);
+
+    font-size: 11px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.progress-track {
+
+    width: 100%;
+
+    height: 7px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    overflow: hidden;
+
+}
+
+
+.progress-fill {
+
+    height: 100%;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #777777
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(255,255,255,0.16);
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-challenge {
+
+    text-align: center;
+
+    padding: 55px 25px;
+
+}
+
+
+.empty-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 23px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    color: white;
+
+    font-size: 30px;
+
+}
+
+
+.empty-title {
+
+    color: white;
+
+    font-weight: 800;
+
+}
+
+
+.empty-text {
+
+    color:
+        rgba(255,255,255,0.40);
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   MOTIVATION CARD
+   ========================================================= */
+
+.motivation-card {
+
+    padding: 27px;
+
+    margin-top: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+}
+
+
+.motivation-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    min-width: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            white,
+            #aaa
+        );
+
+    color: #111;
+
+    font-size: 24px;
+
+}
+
+
+.motivation-title {
+
+    color: white;
+
+    font-weight: 800;
+
+    margin-bottom: 4px;
+
+}
+
+
+.motivation-text {
+
+    color:
+        rgba(255,255,255,0.40);
+
+    font-size: 12px;
+
+    margin: 0;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .challenge-page {
+
+        padding:
+            20px 8px 40px;
+
+    }
+
+    .challenge-hero {
+
+        padding: 25px;
+
+        border-radius: 23px;
+
+    }
+
+    .challenge-title {
+
+        font-size: 29px;
+
+    }
+
+    .motivation-card {
+
+        align-items: flex-start;
+
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="challenge-page">
+
+<div class="container-fluid challenge-container">
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <div class="challenge-hero">
+
+        <div class="challenge-badge">
+
+            <i class="bi bi-trophy-fill"></i>
+
+            FINAI CHALLENGE MODE
+
+        </div>
+
+
+        <h1 class="challenge-title">
+
+            Level Up Your
+            <span>Financial Skills</span>
+
+        </h1>
+
+
+        <p class="challenge-description">
+
+            AI-generated financial challenges designed
+            around your spending behavior and financial goals.
+            Complete them and build better money habits.
+
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         PROFILE
+         ===================================================== -->
+
+    <div class="challenge-card profile-card mb-4">
+
+        <div class="profile-header">
+
+            <div class="profile-icon">
+
+                <i class="bi bi-person-badge"></i>
+
+            </div>
+
+
+            <div>
+
+                <h4 class="profile-title">
+
+                    Your Financial Profile
+
+                </h4>
+
+                <p class="profile-subtitle">
+
+                    AI-generated challenge profile
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if profile %}
+
+        <div class="row g-3 mt-2">
+
+
+            {% if profile is mapping %}
+
+                {% for key, value in profile.items() %}
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div
+                        style="
+                        padding:16px;
+                        border-radius:16px;
+                        background:rgba(255,255,255,.045);
+                        border:1px solid rgba(255,255,255,.07);
+                        "
+                    >
+
+                        <div
+                            style="
+                            color:rgba(255,255,255,.35);
+                            font-size:10px;
+                            text-transform:uppercase;
+                            letter-spacing:.5px;
+                            margin-bottom:5px;
+                            "
+                        >
+
+                            {{ key|replace("_", " ") }}
+
+                        </div>
+
+
+                        <div
+                            style="
+                            color:white;
+                            font-weight:750;
+                            font-size:15px;
+                            "
+                        >
+
+                            {{ value }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="col-12">
+
+                    <p
+                        style="
+                        color:rgba(255,255,255,.48);
+                        margin:15px 0 0;
+                        "
+                    >
+
+                        {{ profile }}
+
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- =====================================================
+         CHALLENGES
+         ===================================================== -->
+
+    <div class="d-flex justify-content-between align-items-end mb-3">
+
+        <div>
+
+            <h3 class="ai-section-title">
+
+                Your AI Challenges
+
+            </h3>
+
+            <p class="ai-section-subtitle mb-0">
+
+                Complete these challenges to improve your financial habits.
+
+            </p>
+
+        </div>
+
+
+        <div class="challenge-tag">
+
+            <i class="bi bi-stars"></i>
+
+            AI Generated
+
+        </div>
+
+    </div>
+
+
+    {% if challenges %}
+
+    <div class="row g-4">
+
+        {% for challenge in challenges %}
+
+        <div class="col-xl-4 col-lg-6">
+
+
+            <div class="challenge-card">
+
+                <div class="challenge-card-body">
+
+
+                    <div class="challenge-number">
+
+                        {{ loop.index }}
+
+                    </div>
+
+
+                    {% if challenge is mapping %}
+
+
+                        {% if challenge.title %}
+
+                        <h4 class="challenge-card-title">
+
+                            {{ challenge.title }}
+
+                        </h4>
+
+                        {% elif challenge.name %}
+
+                        <h4 class="challenge-card-title">
+
+                            {{ challenge.name }}
+
+                        </h4>
+
+                        {% else %}
+
+                        <h4 class="challenge-card-title">
+
+                            Financial Challenge
+
+                        </h4>
+
+                        {% endif %}
+
+
+                        {% if challenge.description %}
+
+                        <p class="challenge-card-description">
+
+                            {{ challenge.description }}
+
+                        </p>
+
+                        {% elif challenge.task %}
+
+                        <p class="challenge-card-description">
+
+                            {{ challenge.task }}
+
+                        </p>
+
+                        {% elif challenge.message %}
+
+                        <p class="challenge-card-description">
+
+                            {{ challenge.message }}
+
+                        </p>
+
+                        {% else %}
+
+                        <p class="challenge-card-description">
+
+                            Use your financial data to complete this challenge.
+
+                        </p>
+
+                        {% endif %}
+
+
+                        {% if challenge.category %}
+
+                        <span class="challenge-tag">
+
+                            <i class="bi bi-tag"></i>
+
+                            {{ challenge.category }}
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="challenge-tag">
+
+                            <i class="bi bi-graph-up"></i>
+
+                            Finance
+
+                        </span>
+
+                        {% endif %}
+
+
+                        {% if challenge.difficulty %}
+
+                        <div class="challenge-progress">
+
+                            <div class="progress-label">
+
+                                <span>
+
+                                    Difficulty
+
+                                </span>
+
+                                <strong>
+
+                                    {{ challenge.difficulty }}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="progress-track">
+
+                                {% if challenge.difficulty|string|lower == "easy" %}
+
+                                    <div
+                                        class="progress-fill"
+                                        style="width:33%;">
+                                    </div>
+
+                                {% elif challenge.difficulty|string|lower == "medium" %}
+
+                                    <div
+                                        class="progress-fill"
+                                        style="width:66%;">
+                                    </div>
+
+                                {% else %}
+
+                                    <div
+                                        class="progress-fill"
+                                        style="width:90%;">
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                        {% endif %}
+
+
+                    {% else %}
+
+                        <h4 class="challenge-card-title">
+
+                            Financial Challenge
+
+                        </h4>
+
+
+                        <p class="challenge-card-description">
+
+                            {{ challenge }}
+
+                        </p>
+
+
+                        <span class="challenge-tag">
+
+                            <i class="bi bi-stars"></i>
+
+                            AI Challenge
+
+                        </span>
+
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+
+    <!-- EMPTY STATE -->
+
+    <div class="challenge-card">
+
+        <div class="empty-challenge">
+
+            <div class="empty-icon">
+
+                <i class="bi bi-stars"></i>
+
+            </div>
+
+
+            <h4 class="empty-title">
+
+                No Challenges Yet
+
+            </h4>
+
+
+            <p class="empty-text">
+
+                Add more income and expense information
+                so FinAI can generate personalized challenges.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         MOTIVATION
+         ===================================================== -->
+
+    <div class="challenge-card motivation-card">
+
+        <div class="motivation-icon">
+
+            <i class="bi bi-lightning-charge-fill"></i>
+
+        </div>
+
+
+        <div>
+
+            <h5 class="motivation-title">
+
+                Small improvements create big financial results.
+
+            </h5>
+
+
+            <p class="motivation-text">
+
+                Track your money, complete your challenges,
+                and let FinAI help you build stronger financial habits.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</div>
+
+{% endblock %}
